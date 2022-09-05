@@ -1,0 +1,14 @@
+# Copyright 2022 Vidwafflez GK
+#
+# We route everything through PHP itself, so sophisticated htaccess
+# rules don't have to be used.
+RewriteEngine On
+
+# Notice: Change URL here if needed.
+RewriteCond %{HTTP_HOST} ^(.+)\.vidwafflez\.com [NC]
+RewriteRule ^((?!index\.php$).*)$ /index.php?subdomain=%1 [L,QSA]
+
+# Redirect nothing to www
+RewriteCond %{HTTP_HOST} ^[^.]+\.[^.]+$
+RewriteCond %{HTTPS}s ^on(s)|
+RewriteRule ^ http%1://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
