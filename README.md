@@ -48,6 +48,6 @@ The server requires:
 
 XAMPP is an easy to setup environment that contains these two prerequisites.
 
-You will need to configure private keys (inside the `inc/` folder).
+You will need to configure private keys (inside the `config/` folder).
 
 Then you need to configure Apache virtual hosts to setup subdomains.
