@@ -9,9 +9,9 @@ use Exception;
  */
 class Api
 {
-    private static $lastInvalidationReason;
+    private static string $lastInvalidationReason;
 
-    public static function resolve($data)
+    public static function resolve(object $data): object
     {
         return (object)[
             "status" => "SUCCESS",
@@ -19,7 +19,8 @@ class Api
         ];
     }
 
-    public static function reject($reason = null, $errors = null)
+    public static function reject(string $reason = null, 
+                                  array $errors = null): object
     {
         $response = [
             "status" => "FAILED"
@@ -41,7 +42,7 @@ class Api
     /**
      * Validate an API request.
      */
-    public static function validateRequest(&$req, $schema)
+    public static function validateRequest(mixed &$req, array $schema): bool
     {
         // Convert types accordingly
         self::convertRequestType($req);
@@ -83,7 +84,7 @@ class Api
     /**
      * Get the last invalidation reason (for reporting API errors)
      */
-    public static function getLastInvalidationReason()
+    public static function getLastInvalidationReason(): string
     {
         return self::$lastInvalidationReason;
     }
@@ -91,7 +92,7 @@ class Api
     /**
      * Set the invalidation reason.
      */
-    protected static function invalidate($reason)
+    protected static function invalidate(string $reason): void
     {
         self::$lastInvalidationReason = $reason;
     }
@@ -99,7 +100,7 @@ class Api
     /**
      * Get the type name for type handlers
      */
-    protected static function getType($v)
+    protected static function getType(mixed $v): string
     {
         $nativeType = gettype($v);
 
@@ -118,11 +119,11 @@ class Api
      * or JSON string from request) to a native PHP object for
      * handling within in the API.
      */
-    protected static function convertRequestType(&$req)
+    protected static function convertRequestType(mixed &$req): object
     {
         if (is_object($req))
         {
-            return; // Nothing needs to be done
+            return $req; // Nothing needs to be done
         }
         else if (is_array($req))
         {
@@ -136,7 +137,7 @@ class Api
             if (false != $json)
             {
                 $req = $json;
-                return;
+                return $req;
             }
         }
     }

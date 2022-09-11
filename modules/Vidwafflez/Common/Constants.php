@@ -8,14 +8,14 @@ namespace Vidwafflez\Common;
  */
 class Constants
 {
-    private static $cache = [];
+    private static array $cache = [];
 
-    public static function __initStatic()
+    public static function __initStatic(): void
     {
         self::loadConstants();
     }
 
-    public static function loadConstants()
+    public static function loadConstants(): array
     {
         $fileName = "config/constants.ini";
         $parsed = parse_ini_file($fileName, true);
@@ -25,7 +25,7 @@ class Constants
         return self::$cache;
     }
 
-    public static function get($name)
+    public static function get(string $name): mixed
     {
         return self::$cache[$name];
     }

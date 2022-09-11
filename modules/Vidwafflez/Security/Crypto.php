@@ -10,13 +10,15 @@ class Crypto
     /**
      * An error-checked wrapper for openssl encrypt.
      */
-    public static function encrypt($data, $algo, $pass, $options = 0, $iv = "", &$tag = null, $aad = "", $taglen = 16)
+    public static function encrypt(string $data, string $algo, string $pass, int $options = 0, 
+                                   string $iv = "", &$tag = null, string $aad = "", 
+                                   int $taglen = 16): string
     {
         $result = openssl_encrypt($data, $algo, $pass, $options, $iv, $tag, $aad, $taglen);
 
         if (false == $result)
         {
-
+            
         }
         else
         {
@@ -27,7 +29,8 @@ class Crypto
     /**
      * An error-checked wrapper for openssl decrypt.
      */
-    public static function decrypt($data, $algo, $pass, $options = 0, $iv = "", &$tag = null, $aad = "")
+    public static function decrypt(string $data, string $algo, string $pass, int $options = 0, 
+                                   string $iv = "", &$tag = null, string $aad = ""): string
     {
         $result = openssl_decrypt($data, $algo, $pass, $options, $iv, $tag, $aad);
 
@@ -41,7 +44,7 @@ class Crypto
         }
     }
 
-    public static function encryptVideoId($id)
+    public static function encryptVideoId(int|string $id): string
     {
         return Base64::urlEncode(
             self::encrypt(
@@ -53,7 +56,7 @@ class Crypto
         );
     }
 
-    public static function decryptVideoId($id)
+    public static function decryptVideoId(int|string $id): string
     {
         return self::decrypt(
             Base64::urlDecode($id), 
@@ -63,7 +66,7 @@ class Crypto
         );
     }
 
-    public static function encryptChannelId($id)
+    public static function encryptChannelId(int|string $id): string
     {
         return Base64::urlEncode(
             self::encrypt(
@@ -76,7 +79,7 @@ class Crypto
         );
     }
 
-    public static function decryptChannelId($id)
+    public static function decryptChannelId(int|string $id): string
     {
         return self::decrypt(
             Base64::urlDecode($id), 

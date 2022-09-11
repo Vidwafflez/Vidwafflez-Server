@@ -16,7 +16,7 @@ class ApiRestRouter
      * Called automatically when an API is requested
      * via HTTP.
      */
-    public static function handle()
+    public static function handle(): void
     {
         $request = new RequestMetadata();
 
@@ -95,7 +95,7 @@ class ApiRestRouter
      * 
      * @param array $path
      */
-    protected static function getCorrespondingClass($path)
+    protected static function getCorrespondingClass(array $path): string
     {
         $guard = "Vidwafflez\\Api\\V1";
 

@@ -14,7 +14,7 @@ class StringUtils
      * 
      * @see https://stackoverflow.com/a/19533226
      */
-    public static function camelToSnake($str, $sepchar = "_")
+    public static function camelToSnake(string $str, string $sepchar = "_"): string
     {
         return strtolower(preg_replace('/(?<!^)[A-Z]/', $sepchar . '$0', $str));
     }
@@ -22,7 +22,8 @@ class StringUtils
     /**
      * Convert a string from snake_case to camelCase or PascalCase.
      */
-    public static function snakeToCamel($str, $pascalCase = false, $sepchar = "_")
+    public static function snakeToCamel(string $str, bool $pascalCase = false, 
+                                        string $sepchar = "_"): string
     {
         $str = str_replace(" ", "", ucwords(str_replace($sepchar, " ", $str)));
 

@@ -7,15 +7,14 @@ namespace Vidwafflez\Base;
  */
 class AppRouter
 {
-    protected static $routes = [];
+    protected static array $routes = [];
 
-    public static function route($cb)
+    public static function route($cb): void
     {
         $cb(self::getUriBase());
     }
 
-    // TODO(tyamamoto): Unused?
-    protected static function getUriBase()
+    protected static function getUriBase(): array
     {
         $uri = $_SERVER["REQUEST_URI"];
         $uri = explode("/", explode("?", $uri)[0]);

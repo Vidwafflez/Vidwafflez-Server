@@ -4,11 +4,12 @@ namespace Vidwafflez\Api\Model;
 
 class UserInfo
 {
-    public $username;
-    public $emailAddress;
-    public $encryptedId;
+    public string $username;
+    public string $emailAddress;
+    public string $encryptedId;
 
-    public function __construct($username, $emailAddress, $encryptedId)
+    public function __construct(string $username, string $emailAddress, 
+                                string $encryptedId)
     {
         $this->username = $username;
         $this->emailAddress = $emailAddress;

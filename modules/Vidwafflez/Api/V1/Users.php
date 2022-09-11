@@ -17,7 +17,7 @@ use PDO;
  */
 class Users
 {
-    public static function getUserInfo($req)
+    public static function getUserInfo(mixed $req): object
     {
         // Validate request
         if (!Api::validateRequest($req, 

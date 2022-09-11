@@ -9,7 +9,7 @@ class Hash
      * Proxy for PHP's standard sha1 for convenience of maintanence,
      * i.e. if a polyfill must be implemented.
      */
-    public static function sha1($data, $binary = false)
+    public static function sha1(string $data, bool $binary = false): string
     {
         return sha1($data, $binary);
     }

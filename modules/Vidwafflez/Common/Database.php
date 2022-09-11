@@ -13,10 +13,10 @@ class Database
     private const MAIN_DB_CONFIG_KEY = "main_db_config";
     private const AUTH_DB_CONFIG_KEY = "auth_db_config";
 
-    private static $instances = [];
-    private static $mainInstance = null;
+    private static array $instances = [];
+    private static PDO $mainInstance;
 
-    public static function __initStatic()
+    public static function __initStatic(): void
     {
         $info = self::getDatabaseInfo();
 
@@ -29,7 +29,7 @@ class Database
         self::$mainInstance = &self::$instances["main"];
     }
 
-    public static function __callStatic($name, $args)
+    public static function __callStatic(string $name, array $args): mixed
     {
         $i = &self::$mainInstance;
 
@@ -54,12 +54,12 @@ class Database
     /**
      * @return PDO
      */
-    public static function &get($name)
+    public static function &get(string $name): PDO
     {
         return self::$instances[$name];
     }
 
-    protected static function createPdoInstance($info)
+    protected static function createPdoInstance(array $info): PDO
     {
         // Formulate DSN string for the PDO constructor
         $driver = $info["driver"];
@@ -75,12 +75,12 @@ class Database
         return new PDO($dsn, $username, $password);
     }
 
-    protected static function insertInstance($name, $i)
+    protected static function insertInstance(string $name, PDO $i): void
     {
         self::$instances += [$name => $i];
     }
 
-    private static function getDatabaseInfo()
+    private static function getDatabaseInfo(): array
     {
         $fileName = "config/db.ini";
         
