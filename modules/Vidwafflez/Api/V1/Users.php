@@ -22,8 +22,8 @@ class Users
         // Validate request
         if (!Api::validateRequest($req, 
         [
-            "requestId" => [
-                "type" => "string"
+            "userId" => [
+                "type" => "int"
             ]
         ]
         )) return Api::reject(Api::getLastInvalidationReason());
