@@ -43,7 +43,7 @@ As usual, clone the repo and checkout the `dev` branch to get started.
 
 The server requires:
 
-- PHP 7.4+
+- PHP 8.0+
 - MySQL
 
 XAMPP is an easy to setup environment that contains these two prerequisites.
