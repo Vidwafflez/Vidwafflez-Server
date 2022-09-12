@@ -9,7 +9,7 @@ class AppRouter
 {
     protected static array $routes = [];
 
-    public static function route($cb): void
+    public static function route(callable $cb): void
     {
         $cb(self::getUriBase());
     }
