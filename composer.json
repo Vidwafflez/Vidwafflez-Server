@@ -1,0 +1,8 @@
+{
+    "config": {
+        "vendor-dir": "modules/composer"
+    },
+    "require": {
+        "twig/twig": "^3.4"
+    }
+}
