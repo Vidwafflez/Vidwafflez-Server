@@ -11,8 +11,8 @@ class StaticRouter
 
         // We don't need to check content type or anything
         // because static folder only has production files
-        if (file_exists("static/" . $path[0] . "/" . $path[1])) {
-            $filename = "static/" . $path[0] . "/" . $path[1];
+        $filename = urldecode("static/" . $path[0] . "/" . $path[1]);
+        if (file_exists($filename)) {
             header("Content-Type: " . mime_content_type($filename));
             echo(file_get_contents($filename));
         } else {
