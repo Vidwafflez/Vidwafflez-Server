@@ -1,7 +1,7 @@
-# Vidwafflez Monorepo
+# Vidwafflez Server
 **Copyright (c) 2022 Vidwafflez GK. All rights reserved.**
 
-Welcome to the Vidwafflez monorepo. This contains all files you will possibly want to edit as any developer or contributor to the project.
+Welcome to the Vidwafflez server monorepo. This contains all source code pertaining to the server and API.
 
 # Releasing source code
 
@@ -10,20 +10,6 @@ Welcome to the Vidwafflez monorepo. This contains all files you will possibly wa
 This policy is in place in order to ensure user privacy and to maintain **security through obscurity** (STO) measures remain in place.
 
 Production secret keys shall not be distributed through this repository.
-
-# Commit format
-
-Within your commit titles, please include the name of the component you modified in brackets near the front. As an example:
-
-```
-[frontend/www/css] Fixed displaced position in Safari.
-```
-
-As long as it's reasonable, you can refer to a larger project within the name. This is useful if you make multiple changes, such as adding a feature to the frontend which would require changes across the HTML templates, JS source code, and CSS stylesheets.
-
-```
-[frontend/www] Added recommended content box.
-```
 
 # Branch format
 
@@ -39,11 +25,17 @@ Depending on which portion of the site you are working on, you may have wildly d
 
 As usual, clone the repo and checkout the `dev` branch to get started.
 
+Just cloning the repo will not suffice for a working experience. Some aspects of the server are separated into separated Git repositories, meaning you need to run this first:
+
+```
+git submodule init
+```
+
 ## Hosting the server
 
 The server requires:
 
-- PHP 8.0+
+- PHP 8.1+
 - MySQL
 
 XAMPP is an easy to setup environment that contains these two prerequisites.
