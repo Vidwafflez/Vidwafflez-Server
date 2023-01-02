@@ -1,3 +1,7 @@
+# What was Vidwafflez
+
+Our idea for an alternative YouTube-like social network website. We never gave it much focus and it didn't get very far into development. Hence all the code here is open source and may be used for whatever purposes you find necessary, licences no longer applying.
+
 # Vidwafflez Server
 **Copyright (c) 2022 Vidwafflez GK. All rights reserved.**
 
