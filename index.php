@@ -4,24 +4,30 @@
 // This file implements early loader procedures, acting
 // as the insertion point for the Vidwafflez server.
 
+//error_reporting(0);
+
 require "inc/main.php";
 use Vidwafflez\Base\AppRouter;
 use Vidwafflez\Base\ApiRestRouter;
 use Vidwafflez\StaticRouter\StaticRouter;
+use Vidwafflez\WebFrontend\WebFrontendFactory;
 
-switch ($_GET["subdomain"])
+$subdomain = $_GET["subdomain"];
+
+switch ($subdomain)
 {
     // Web frontend subdomains
     case "www":
     case "m":
-        AppRouter::route(function($uri) {
+        AppRouter::route(function($uri) use ($subdomain) {
             switch ($uri[0])
             {
                 case "api":
                     ApiRestRouter::handle();
                     break;
                 default:
-                    echo "Hello world";die();
+                    $controller = WebFrontendFactory::get($subdomain);
+                    $controller->start();
                     break;
             }
         });

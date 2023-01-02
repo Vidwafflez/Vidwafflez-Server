@@ -58,6 +58,8 @@ class GetControllerInstance
             $passedArgs[] = $template;
         }
 
+        $passedArgs[] = new RequestMetadata();
+
         array_merge($passedArgs, $args);
 
         // Check if the method exists in the bound controller
@@ -66,7 +68,7 @@ class GetControllerInstance
             // Invoke the method
             $method = new ReflectionMethod($this->boundController, $name);
 
-            return $method->invoke($this->boundController, $passedArgs);
+            return $method->invoke($this->boundController, ...$passedArgs);
         }
         else
         {

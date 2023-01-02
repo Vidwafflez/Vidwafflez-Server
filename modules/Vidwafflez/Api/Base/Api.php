@@ -6,11 +6,24 @@ use Exception;
 
 /**
  * Implements base API behaviours.
+ * 
+ * It is an API for the APIs, sorta. This class is responsible for
+ * implementing all common API behaviours, such as resolution,
+ * rejection, and validation.
+ * 
+ * If a behaviour is shared between multiple APIs, it's probably
+ * better off here.
  */
 class Api
 {
     private static string $lastInvalidationReason;
 
+    /**
+     * Resolve an API request.
+     * 
+     * This wraps an API response in a status wrapper in order to
+     * report additional information about the API status.
+     */
     public static function resolve(object $data): object
     {
         return (object)[
@@ -19,6 +32,15 @@ class Api
         ];
     }
 
+    /**
+     * Reject an API request.
+     * 
+     * As the above function does, this returns a status wrapper
+     * that signifies that the request as failed. 
+     * 
+     * In many cases, additional information may be provided such as the 
+     * failure reason or a list of errors that occurred during the process.
+     */
     public static function reject(string $reason = null, 
                                   array $errors = null): object
     {
@@ -41,6 +63,26 @@ class Api
 
     /**
      * Validate an API request.
+     * 
+     * API validation compares the request to a schema, which allows a simple
+     * definition to preface an API saying what to use.
+     * 
+     * The validation functionality only runs a few simple checks on the API,
+     * as in no preset behaviour occurs upon an invalidation. Handling of an
+     * invalid request is left solely to the API implementation itself.
+     * 
+     * This function returns a boolean reporting if the request is valid, and
+     * if it isn't, additionally updates the last invalidation reason which can
+     * be reported by an API rejection or any similar notice. The boolean response
+     * allows a clear and concise usage within an if statement:
+     * 
+     * <code>
+     *     if (!Api::validateRequest($schema)) 
+     *         return Api::reject(Api::getLastInvalidationReason());
+     * </code>
+     * 
+     * @see ::getLastInvalidationReason() for getting error message upon
+     *                                    invalidation
      */
     public static function validateRequest(mixed &$req, array $schema): bool
     {
